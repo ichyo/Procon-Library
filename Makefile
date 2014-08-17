@@ -2,6 +2,7 @@ CXX = g++
 CFLAGS = 
 CPPFLAGS = -std=c++11 -Wall -Wextra -Wno-sign-compare -Werror
 
+SOURCE = $(wildcard */*.cpp)
 TESTS  = $(wildcard */*_test.cpp)
 TARGETS = $(TESTS:.cpp=)
 
@@ -12,7 +13,7 @@ all: $(TARGETS)
 clean:
 	rm $(TARGETS)
 
-$(TARGETS): %:%.cpp gtest/gtest-all.o gtest/gtest_main.o
+$(TARGETS): %:%.cpp gtest/gtest-all.o gtest/gtest_main.o $(SOURCE)
 	$(CXX) $(CFLAGS) $(CPPFLAGS) -o $@ $< gtest/gtest-all.o gtest/gtest_main.o -I.
 	$@
 
