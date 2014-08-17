@@ -1,4 +1,6 @@
 using namespace std;
+#define REP(i,n) for(int i=0; i<int(n);i++)
+typedef long long LL;
 
 /** @file stdc++.h
  *  This is an implementation file for a precompiled header.
