@@ -1,5 +1,7 @@
 #include "../common/common.h"
 
+// cf. http://hos.ac/slides/20140319_bit.pdf
+
 // Binary Indexed Tree (Fenwick Tree) (0-indexed)
 // two queries in O(log n)
 // 1. add w to v[at]
