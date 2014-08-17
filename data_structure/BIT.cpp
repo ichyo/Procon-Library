@@ -32,3 +32,4 @@ struct BIT{
 // 1. add w to v_a, v_{a + 1}, ..., v_b
 // 2. get the sum of v_0, v_1, ..., v_{c - 1}
 
+

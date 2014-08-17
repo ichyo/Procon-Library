@@ -1,6 +1,6 @@
 CXX = g++
 CFLAGS = 
-CPPFLAGS = -Wall -Wextra -Wno-sign-compare -Werror
+CPPFLAGS = -std=c++11 -Wall -Wextra -Wno-sign-compare -Werror
 
 TESTS  = $(wildcard */*_test.cpp)
 TARGETS = $(TESTS:.cpp=)
