@@ -5,11 +5,11 @@
 // 1. add w to v[at]
 // 2. the sum of v_0, v_1, .., v_at
 struct BIT{
-    vector<int> sums;
+    vector<LL> sums;
     BIT(int n) : sums(n) {}
 
     // v[at] += by
-    void add(int at, int by) {
+    void add(int at, LL by) {
         while(at < sums.size()){
             sums[at] += by;
             at |= at + 1;
@@ -17,8 +17,8 @@ struct BIT{
     }
 
     // v[0] + ... + v[at]
-    int get(int at) {
-        int res = 0;
+    LL get(int at) {
+        LL res = 0;
         while(at >= 0) {
             res += sums[at];
             at = (at & (at + 1)) - 1;
