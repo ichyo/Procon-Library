@@ -47,10 +47,11 @@ struct UnionFindW{
     // (a, b, offset of [b] - offset of [a])
     bool unite(int a, int b, int d){
         pair<int, int> pa = root(a), pb = root(b);
-        if(pa.first != pb.first){
-            uf[pa.first] = make_pair(pb.first, pb.second - pa.second + d);
+        int ra = pa.first, rb = pb.first;
+        if(ra != rb) {
+            uf[ra] = make_pair(rb, pb.second - pa.second + d);
         }
-        return pa.first != pb.first;
+        return ra != rb;
     }
 
     // 同じ集合に含まれるかどうか
