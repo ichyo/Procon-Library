@@ -27,6 +27,10 @@ struct BIT{
         }
         return res;
     }
+
+    // --- optional ---
+    int size() const { return sums.size(); }
+    LL operator [](int idx) const { return sums[idx]; }
 };
 
 // BIT (range-version) (0-indexed)
@@ -89,5 +93,64 @@ struct BIT2D{
             }
         }
         return res;
+    }
+};
+
+// Integer set implemented by BIT
+// Time: O(log n)
+// operation:
+// 1. insert 
+// 2. erase
+// 3. nth_element
+// 4. index (nth_element(index(x)) == x)
+// 5. etc
+struct BITSet{
+    BIT bit;
+    BITSet(int n) : bit(n) {}
+    bool insert(int x) {
+        if(count(x) == 1) return false;
+        bit.add(x, +1);
+        return true;
+    }
+
+    bool erase(int x) {
+        if(count(x) == 0) return false;
+        bit.add(x, -1);
+        return true;
+    }
+
+    int size() {
+        return bit.get(bit.size() - 1);
+    }
+
+    void clear() {
+        bit = BIT(bit.size());
+    }
+
+    int operator[](int idx) {
+        if(idx < 0 || idx >= size()) return -1;
+        idx ++;
+        int x = -1;
+        int k = 1;
+        while(2 * k < bit.size()){
+            k *= 2;
+        }
+        while(k > 0) {
+           if(x + k < bit.size() && bit[x + k] < idx) {
+                idx -= bit[x + k];
+                x += k;
+            }
+            k >>= 1;
+        }
+        return x + 1;
+    }
+
+    int index(int x) {
+        if(!count(x)) return -1;
+        return bit.get(x) - 1;
+    }
+
+    int count(int x) {
+        return bit.get(x) - bit.get(x - 1);
     }
 };
