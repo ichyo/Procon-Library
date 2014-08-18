@@ -43,3 +43,36 @@ TEST(BITRange, Random) {
         ASSERT_EQ(bit.get(x + 1), res);
     }
 }
+
+TEST(BIT2D, Random) {
+    int H = 500;
+    int W = 300;
+    int N = 1000;
+    BIT2D bit(H, W);
+    vector<vector<LL>> grid(H, vector<LL>(W));
+    for(int k = 0; k < N; k++) {
+        int x = rand() % W;
+        int y = rand() % H;
+        int w = rand();
+        bit.add(x, y, w);
+        grid[y][x] += w;
+
+        int a = rand() % W;
+        int b = rand() % H;
+        LL res = 0;
+        for(int i = 0; i <= b; i++) {
+            for(int j = 0; j <= a; j++) {
+                res += grid[i][j];
+            }
+        }
+
+        ASSERT_EQ(bit.get(a, b), res);
+    }
+    LL all = 0;
+    for(int y = 0; y < H; y++) {
+        for(int x = 0; x < W; x++) {
+            all += grid[y][x];
+        }
+    }
+    ASSERT_EQ(bit.get(W - 1, H - 1), all);
+}
