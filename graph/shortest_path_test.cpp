@@ -63,7 +63,7 @@ TEST(Dijkstra, Large){
     int E = 1e6;
     int D = 1e3;
     Graph g = random(N, E, D);
-    SPFA(g, 0);
+    dijkstra(g, 0);
 }
 
 TEST(All, ResultEqual) {
