@@ -1,4 +1,4 @@
-#include "tarjan.cpp"
+#include "strongly_connected_component.cpp"
 #include "../gtest/gtest.h"
 
 Graph random(int n, int e) {
