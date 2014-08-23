@@ -1,21 +1,27 @@
-// 使い方:
-// /* 頂点の数を指定する */ Dinic dinic(n);
-// /* 辺を張る(始点, 終点, 辺の容量) */
-// dinic.add_edge(0, 1, 3); dinic.add_edge(1, 2, 2);
-// /* 最大流の大きさを出力(始点, 終点) */ cout << dinic.max_flow(0, 2) << endl;
-struct Dinic{
-    struct Edge{
-        int dst, cap, rev;
-        Edge(){}
-        Edge(int d, int c, int r) :
-            dst(d), cap(c), rev(r) {}
-    };
-    typedef vector<Edge> Node;
-    typedef vector<Node> Graph;
+#include "../common/common.h"
+#include "../common/graph_flow.h"
 
+// Dinic
+//
+// 使い方:
+// /* 頂点の数を指定する */
+// Dinic dinic(n);
+// /* 辺を張る(始点, 終点, 辺の容量) */
+// dinic.add_edge(0, 1, 3);
+// dinic.add_edge(1, 2, 2);
+// /* 最大流の大きさを出力(始点, 終点) */
+// cout << dinic.max_flow(0, 2) << endl;
+//
+// 注意:
+// - max_flow()は副作用としてグラフを変更するので，
+//   一度実行するとそれ以降は正しくmax_flowが求まらない．
+//
+struct Dinic{
     Graph G;
     vector<int> level;
     vector<int> iter;
+    
+    Dinic(int N) : G(N), level(N), iter(N) {}
 
     void bfs(int s){
         level.assign(G.size(), -1);
@@ -49,11 +55,9 @@ struct Dinic{
         return 0;
     }
 
-    Dinic(int N) : G(N), level(N), iter(N) {}
-
     void add_edge(int src, int dst, int cap){
-        G[src].push_back(Edge(dst, cap, G[dst].size()));
-        G[dst].push_back(Edge(src, 0, G[src].size() - 1));
+        G[src].push_back({dst, cap, G[dst].size()});
+        G[dst].push_back({src, 0, G[src].size() - 1});
     }
 
     int max_flow(int src, int dst){
@@ -71,3 +75,4 @@ struct Dinic{
         return flow;
     }
 };
+
