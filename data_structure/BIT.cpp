@@ -101,7 +101,7 @@ struct BIT2D{
 // operation:
 // 1. insert 
 // 2. erase
-// 3. nth_element
+// 3. nth_element (operator [])
 // 4. index (nth_element(index(x)) == x)
 // 5. etc
 struct BITSet{
