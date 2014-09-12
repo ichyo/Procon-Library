@@ -1,6 +1,6 @@
 CXX = g++
 CFLAGS = 
-CPPFLAGS = -std=c++11 -Wall -Wextra -Wno-sign-compare -Werror
+CPPFLAGS = -std=c++11 -Wall -Wextra -Wno-sign-compare -Werror -fsanitize=address
 
 SOURCE = $(wildcard */*.cpp)
 TESTS  = $(wildcard */*_test.cpp)
