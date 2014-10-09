@@ -4,6 +4,43 @@
 // Tarjan's strongly connected components algorithm
 // Complexity: O(|V| + |E|)
 
+// two dfs implementation (reference: spaghetti source)
+int scc(const Graph& G, const Graph& RG, vector<int>& cmp) {
+    int n = G.size();
+    int K = 0; // the number of components
+
+    cmp.assign(n, -1); // cmp[v] := component id of vertex v (0, 1, ..., K-1)
+    vector<bool> used(n);
+    vector<int> order;
+
+    // ordinary dfs
+    function<void(int)> dfs = [&](int u) {
+        used[u] = true;
+        for(int w : G[u]) if(!used[w]) {
+            dfs(w);
+        }
+        order.push_back(u);
+    };
+    for(int u = 0; u < n; u++) if(!used[u]) {
+        dfs(u);
+    }
+    reverse(order.begin(), order.end());
+
+    // reverse dfs
+    function<void(int)> rdfs = [&](int u) {
+        cmp[u] = K;
+        for(int w : RG[u]) if(cmp[w] == -1) {
+            rdfs(w);
+        }
+    };
+    for(int u : order) if(cmp[u] == -1) {
+        rdfs(u);
+        K++;
+    }
+
+    return K;
+}
+
 // one dfs implementation (reference: en.wikipedia.org)
 int tarjan(const Graph& G, vector<int>& cmp) {
     int n = G.size();
@@ -20,8 +57,7 @@ int tarjan(const Graph& G, vector<int>& cmp) {
         id[v] = low[v] = index++;
         color[v] = 1;
         S.push(v);
-        for(Edge e : G[v]) {
-            int w = e.dst;
+        for(int w : G[v]) {
             if(color[w] == 0) {
                 dfs(w);
                 low[v] = min(low[v], low[w]);
@@ -52,39 +88,3 @@ int tarjan(const Graph& G, vector<int>& cmp) {
     return K;
 }
 
-// two dfs implementation (reference: spaghetti source)
-int scc(const Graph& G, const Graph& RG, vector<int>& cmp) {
-    int n = G.size();
-    int K = 0; // the number of components
-
-    cmp.assign(n, -1); // cmp[v] := component id of vertex v (0, 1, ..., K-1)
-    vector<bool> used(n);
-    vector<int> order;
-
-    // ordinary dfs
-    function<void(int)> dfs = [&](int u) {
-        used[u] = true;
-        for(Edge e : G[u]) if(!used[e.dst]) {
-            dfs(e.dst);
-        }
-        order.push_back(u);
-    };
-    for(int u = 0; u < n; u++) if(!used[u]) {
-        dfs(u);
-    }
-    reverse(order.begin(), order.end());
-
-    // reverse dfs
-    function<void(int)> rdfs = [&](int u) {
-        cmp[u] = K;
-        for(Edge e : RG[u]) if(cmp[e.dst] == -1) {
-            rdfs(e.dst);
-        }
-    };
-    for(int u : order) if(cmp[u] == -1) {
-        rdfs(u);
-        K++;
-    }
-
-    return K;
-}
