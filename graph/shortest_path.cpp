@@ -14,12 +14,10 @@ vector<int> bellmanford(const Graph& G, int s){
     dist[s] = 0;
     REP(iter, n) {
         bool update = false;
-        for(int i = 0; i < n; i++) {
-            for(Edge e : G[i]) {
-                if(dist[i] != INF && dist[e.dst] > dist[i] + e.cost) {
-                    dist[e.dst] = dist[i] + e.cost;
-                    update = true;
-                }
+        REP(i, n) if(dist[i] != INF) for(auto& e : G[i]) {
+            if(dist[e.dst] > dist[i] + e.cost) {
+                dist[e.dst] = dist[i] + e.cost;
+                update = true;
             }
         }
         // 更新が完了したときに最短路が求まる
@@ -63,7 +61,7 @@ vector<int> SPFA(const Graph& G, int s) {
 }
 
 // Dijkstra
-// Compexity: // O((E + V) log V)
+// Compexity: O((E + V) log V)
 //
 // 注意
 // - 負の辺がある場合は利用できない．
