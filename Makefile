@@ -1,4 +1,4 @@
-CXX = g++
+CXX = g++-4.9
 CFLAGS = 
 CPPFLAGS = -std=c++11 -Wall -Wextra -Wno-sign-compare -Werror -fsanitize=address
 
