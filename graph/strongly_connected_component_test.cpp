@@ -14,7 +14,7 @@ Graph random(int n, int e) {
             b = dis(gen);
             if(!m[a].count(b)) break;
         }
-        G[a].push_back({b, 0});
+        G[a].push_back(b);
         m[a].insert(b);
     }
     return G;
@@ -24,8 +24,8 @@ Graph reverse(const Graph& G) {
     int n = G.size();
     Graph RG(n);
     for(int i = 0; i < n; i++) {
-        for(Edge e : G[i]) {
-            RG[e.dst].push_back({i, 0});
+        for(int j : G[i]) {
+            RG[j].push_back(i);
         }
     }
     return RG;
@@ -57,13 +57,13 @@ TEST(Tarjan, OrderCheck){
     vector<int> ord;
     
     tarjan(g, ord);
-    REP(u, n) for(Edge e : g[u]) {
-        ASSERT_TRUE(ord[u] <= ord[e.dst]) << "tarjan failed : " << ord[u] << " <= " << ord[e.dst] << endl;
+    REP(u, n) for(int v : g[u]) {
+        ASSERT_TRUE(ord[u] <= ord[v]) << "tarjan failed : " << ord[u] << " <= " << ord[v] << endl;
     }
 
     scc(g, rg, ord);
-    REP(u, n) for(Edge e : g[u]) {
-        ASSERT_TRUE(ord[u] <= ord[e.dst]) << "scc failed : " << ord[u] << " <= " << ord[e.dst] << endl;
+    REP(u, n) for(int v : g[u]) {
+        ASSERT_TRUE(ord[u] <= ord[v]) << "scc failed : " << ord[u] << " <= " << ord[v] << endl;
     }
 }
 
@@ -94,8 +94,7 @@ TEST(Tarjan, ZOJ3795) {
     REP(u, n) size1[ ord1[u] ]++;
     vector<int> dp1(K1);
     REP(i, K1) dp1[i] = size1[i];
-    REP(u, n) for(Edge e : g[u]) {
-        int v = e.dst;
+    REP(u, n) for(int v : g[u]) {
         dp1[ord1[v]] = max(dp1[ord1[v]], dp1[ord1[u]] + size1[ord1[v]]);
     }
 
@@ -105,8 +104,7 @@ TEST(Tarjan, ZOJ3795) {
     REP(u, n) size2[ ord2[u] ]++;
     vector<int> dp2(K2);
     REP(i, K2) dp2[i] = size2[i];
-    REP(u, n) for(Edge e : g[u]) {
-        int v = e.dst;
+    REP(u, n) for(int v : g[u]) {
         dp2[ord2[v]] = max(dp2[ord2[v]], dp2[ord2[u]] + size2[ord2[v]]);
     }
 
