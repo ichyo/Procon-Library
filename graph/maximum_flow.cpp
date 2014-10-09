@@ -1,7 +1,7 @@
 #include "../common/common.h"
 #include "../common/graph_flow.h"
 
-// Dinic
+// Dinic O(V^2 E)
 //
 // 使い方:
 // /* 頂点の数を指定する */
