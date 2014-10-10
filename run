@@ -1,0 +1,4 @@
+CXX="g++-4.9"
+CPPFLAGS="-std=c++11 -Wall -Wextra -Wno-sign-compare -Werror -fsanitize=address -I."
+
+${CXX} -o $1_test ${CPPFLAGS} $1_test.cpp gtest/gtest-all.o gtest/gtest_main.o && $1_test 
