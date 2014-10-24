@@ -1,3 +1,9 @@
 *.o
 *_test
 !*_test.cpp
+
+*.sty
+*.dvi
+*.aux
+*.log
+*.toc
