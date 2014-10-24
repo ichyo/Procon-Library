@@ -1,0 +1,12 @@
+"set tabstop=4 softtabstop=4 shiftwidth=4
+set ts=4 sts=4 sw=4 
+"set expandtab smarttab
+set et sta
+"set cindent smartindent
+set cin si
+"set number nocompatible
+set nu nocp 
+syntax enable
+noremap j gj
+noremap k gk
+autocmd BufNewFile  *.cpp  0r ~/tmpl.cpp
