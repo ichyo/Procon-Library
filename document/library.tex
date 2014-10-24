@@ -1,0 +1,239 @@
+\documentclass[landscape, twocolumn, 9pt]{jsarticle}
+\AtBeginDvi{\special{landscape}} 
+
+%余白を指定
+\usepackage[margin=1cm]{geometry}
+
+%コマンドを再定義
+\makeatletter
+	%sectionのフォントサイズをnormalに
+	\renewcommand{\section}{%
+	\@startsection{section}{1}{\z@}%
+	{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+	{.5\Cvs \@plus.3\Cdp}%
+	{\reset@font\normalsize\bfseries}}
+	%目次表題を変更
+	\renewcommand{\contentsname}{\large ProconLibrary}
+\makeatother
+
+%フッター, ヘッダー
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\leftmark}
+\rhead{\thepage}
+\lfoot{ichyo}
+\rfoot{last modified: \today}
+
+%ソースコードの表示
+\usepackage{listings, jlisting}
+\usepackage{ascmac,here,txfonts,txfonts}
+\usepackage{color}
+\lstset{language=c++,
+        numbers=left,
+        breaklines=true,
+        frame=single,
+        basicstyle={\small\ttfamily},
+        commentstyle={\color[cmyk]{1,0.4,1,0}},
+        keywordstyle={\bfseries \color[cmyk]{0.4,1,1,0}},
+        stringstyle={\ttfamily \color[rgb]{0,0,0.6}},
+        framesep=2pt,
+        numbersep=5pt,
+        numberstyle=\scriptsize,
+        tabsize=2}
+
+\begin{document}
+
+%目次(subsectionまで表示)
+\setcounter{tocdepth}{2}
+\tableofcontents
+\clearpage
+
+% 本文
+\section{Common}
+\subsection{設定ファイル}
+\lstinputlisting[language=]{../common/vimrc}
+\lstinputlisting[language=]{../common/xmodmap}
+\subsection{テンプレート}
+\subsubsection{common.h}
+\lstinputlisting{../common/common.h}
+\subsubsection{graph.h}
+\lstinputlisting{../common/graph.h}
+\subsubsection{graph\_weight.h}
+\lstinputlisting{../common/graph_weight.h}
+\subsubsection{graph\_flow.h}
+\lstinputlisting{../common/graph_flow.h}
+
+\section{グラフ}
+\subsection{用語集}
+\begin{description}
+    \item[マッチング] 辺の集合．どの2辺も端点を共有しない．
+    \item[辺カバー] 辺の集合．すべての点に対して，それに接続する辺のいずれかが入っている．(辺で点をカバーする)
+    \item[安定集合] 点の集合．どの2点も隣接していない．
+    \item[点カバー] 点の集合．すべての辺に対して，端点のどちらかが入っている．(点で辺をカバーする)
+    \item[DAG] Directed Acyclic Graph．閉路を持たない有向グラフ．
+    \item[パス] 頂点の列$v_1, v_2, \dots, v_k$．隣り合う2頂点間に辺が存在する．
+    \item[パスカバー] パスの集合．すべての頂点が，集合内のパスによってカバーされる．
+    \item[独立パスカバー] パス同士の間に頂点の共有がないようなパスカバー．
+    \item[推移性のあるグラフ] 頂点aからbと，bからcに辺があるなら，必ずaからcにも辺があるようなグラフ．
+    \item[有向グラフの二部グラフ化] 1つの頂点vを2つの頂点v[入口]とv[出口]に分けて，vからuへの辺があるなら，v[出口]からu[入口]に辺を引く．
+\end{description}
+\subsection{公式集}
+\subsubsection{オイラーの多面体定理}
+連結な平面グラフについて，頂点数$V$, 辺数$E$, 面数$F$の関係は外面も含めて$V - E + F = 2$
+\subsubsection{マッチングなどの関係式} % 要確認
+\begin{itemize}
+    \item $|最大マッチング| \leq |最小点カバー|$ (二部グラフでは等号成立) 
+    \item $|最大安定集合| + |最小点カバー| = |V|$
+    \item 孤立点のないグラフについて，$|最大マッチング| + |最小辺カバー| = |V|$
+    \item 二部グラフについて，$|最小辺カバー| = |最大安定集合|$
+    \item $X \in V(G)がGの点カバー \iff V(G) - XはGの安定集合$
+\end{itemize}
+\subsubsection{パスカバーの関係式}
+\begin{itemize}
+    \item $|最小パスカバー| \leq |最小独立パスカバー| \leq |最大安定集合|$
+    \item 推移性のあるグラフについて，$|最小パスカバー| = |最大安定集合|$
+    \item DAGについて，$|V| - |二部グラフ化したものの最大マッチング| = |最小独立パスカバー|$
+    \item 推移性のあるDAGについて，$|最大安定集合| = |最小独立パスカバー| = |最小パスカバー| = |V| - |二部グラフ化したものの最大マッチング|$
+\end{itemize}
+
+\subsection{最短経路}
+\lstinputlisting{../graph/shortest_path.cpp}
+
+\subsection{トポロジカルソート}
+\lstinputlisting{../graph/topological_sort.cpp}
+
+\subsection{強連結成分分解}
+\lstinputlisting{../graph/strongly_connected_component.cpp}
+
+\subsection{2-SAT}
+\lstinputlisting{../graph/2sat.cpp}
+
+\subsection{最大二部マッチング(Ford Furkerson) $O(V (V + E))$}
+二部グラフの最大マッチングの大きさを求める．
+\lstinputlisting{../graph/bipartite_matching.cpp}
+
+\subsection{最大二部マッチング(Hopcroft-Karp) $O(E \sqrt{V})$}
+ Ford Furkersonよりも高速に二部グラフの最大マッチングを求めるアルゴリズム
+\lstinputlisting{../graph/hopcraft_karp.cpp}
+
+\subsection{最大流(Dinic) $O(EV^2)$}
+最大流問題を解くアルゴリズム．実用上高速なアルゴリズム
+(ランダムケースなどの得意なグラフだと体感でO(VE)とかO(V + E)くらいの速さで動くらしい)
+
+ 注意:\verb|max_flow()|を何度も実行するときはgraphを保存しておくこと．(\verb|max_flow()|でグラフの情報が壊れる)
+ \lstinputlisting{../graph/maximum_flow.cpp}
+
+\subsection{最小費用流(Primal-Dual) $O(F E log V)$ ,Fは流量}
+始点sから終点tまでの流量fのフローでコストが最小のものを求めるアルゴリズム．
+
+注意:辺のコストが負のときは使えない, 多重辺や自己辺を入れてはいけない
+\lstinputlisting{../graph/min_cost_flow.cpp}
+
+\subsection{最近共通祖先}
+\lstinputlisting{../graph/lca.cpp}
+
+\subsection{最小シュタイナー木 $O(n4^t + n^2 2^t + n^3)$}
+シュタイナー木 := $V$の部分集合$T$に対して，$T$のすべての頂点を含む木のこと
+\lstinputlisting{../graph/minimum_steiner_tree.cpp}
+
+\subsection{最小全域有向木 $O(V E)$}
+\begin{itemize}
+        \item 強連結成分分解が必要
+        \item グラフが壊されることに注意
+\end{itemize}
+\lstinputlisting{../graph/minimum_optimum_branching.cpp}
+
+\subsection{支配集合問題}
+\lstinputlisting{../graph/minimum_dominating_set.cpp}
+
+\subsection{極大/最大 独立集合・クリーク}
+\lstinputlisting{../graph/maximum_independent_set.cpp}
+
+\subsection{オンライントポロジカルソート}
+\lstinputlisting{../graph/online_topological_sort.cpp}
+
+\section{データ構造}
+\subsection{UnionFind}
+\lstinputlisting{../data_structure/union_find.cpp}
+
+\subsection{BIT}
+\lstinputlisting{../data_structure/BIT.cpp}
+
+\subsection{Treap}
+\lstinputlisting{../data_structure/treap.cpp}
+
+\subsection{Lower Envelope}
+\lstinputlisting{../data_structure/lower_envelope.cpp}
+
+\section{動的計画法}
+\subsection{編集距離}
+\lstinputlisting{../dynamic_programming/edit_distance.cpp}
+
+\subsection{ナップサック問題(近似)}
+\lstinputlisting{../dynamic_programming/knapsack_approximation.cpp}
+
+\subsection{最長共通部分列}
+\lstinputlisting{../dynamic_programming/longest_common_subsequence.cpp}
+
+\section{文字列}
+\subsection{Trie}
+\lstinputlisting{../string/trie.cpp}
+\subsection{Aho corasick}
+\lstinputlisting{../string/aho_corasick.cpp}
+\subsection{Suffix Array}
+\lstinputlisting{../string/suffix_array.cpp}
+\subsection{Rolling Hash}
+\lstinputlisting{../string/rolling_hash.cpp}
+
+\section{数学}
+\subsection{組み合わせ数}
+\lstinputlisting{../math/combination.cpp}
+
+\subsection{二次方程式・三次方程式}
+\lstinputlisting{../math/equation.cpp}
+
+\subsection{ユークリッドの互除法}
+\lstinputlisting{../math/euclid.cpp}
+
+\subsection{ガウスジョルダン}
+\lstinputlisting{../math/gauss_jordan_elimination.cpp}
+
+\subsection{Givens Elimination}
+\lstinputlisting{../math/givens_elimination.cpp}
+
+\subsection{行列演算}
+\lstinputlisting{../math/matrix.cpp}
+
+\subsection{miller rabin素数判定}
+\lstinputlisting{../math/miller_rabin.cpp}
+
+\subsection{剰余演算}
+\lstinputlisting{../math/mod.cpp}
+
+\subsection{剰余クラス}
+\lstinputlisting{../math/mod_class.cpp}
+
+\subsection{二分探索・三分探索}
+\lstinputlisting{../math/optimization.cpp}
+
+\subsection{有理数クラス}
+\lstinputlisting{../math/rational.cpp}
+
+\subsection{区間篩}
+\lstinputlisting{../math/segment_sieve.cpp}
+
+\subsection{数値積分}
+\lstinputlisting{../math/simpson.cpp}
+
+\subsection{Z変換}
+\lstinputlisting{../math/z_transform.cpp}
+
+\section{その他}
+\subsection{bit演算}
+\lstinputlisting{../others/bit.cpp}
+\subsection{日付計算}
+\lstinputlisting{../others/date.cpp}
+\subsection{ダイス}
+\lstinputlisting{../others/dice.cpp}
+
+\end{document}
