@@ -1,7 +1,7 @@
 #include "../common/common.h"
 #include "../common/graph_flow.h"
-
 // Dinic O(V^2 E)
+// Verify: Many Problems
 //
 // 使い方:
 // /* 頂点の数を指定する */
@@ -56,8 +56,8 @@ struct Dinic{
     }
 
     void add_edge(int src, int dst, int cap){
-        G[src].push_back({dst, cap, G[dst].size()});
-        G[dst].push_back({src, 0, G[src].size() - 1});
+        G[src].push_back({dst, cap, (int)G[dst].size()});
+        G[dst].push_back({src, 0, (int)G[src].size() - 1});
     }
 
     int max_flow(int src, int dst){
@@ -76,3 +76,43 @@ struct Dinic{
     }
 };
 
+// Ford-Fulkerson
+// 計算量: O(FE) 
+// Verify: AOJ 2076
+struct FordFulkerson{
+    Graph G;
+    vector<bool> used;
+    FordFulkerson(int N) : G(N) {}
+
+    void add_edge(int src, int dst, int cap){
+        G[src].push_back({dst, cap, (int)G[dst].size()});
+        G[dst].push_back({src, 0, (int)G[src].size() - 1});
+    }
+
+    int max_flow(int src, int dst) {
+        int flow = 0;
+        while(true) {
+            used.assign(G.size(), false);
+            int f = dfs(src, dst, INT_MAX);
+            if(f == 0) break;
+            flow += f;
+        }
+        return flow;
+    }
+
+    int dfs(int v, int t, int f) {
+        if(v == t) return f;
+        used[v] = true;
+        for(Edge& e : G[v]) {
+            if(e.cap > 0 && !used[e.dst]) {
+                int d = dfs(e.dst, t, min(f, e.cap));
+                if(d > 0) {
+                    e.cap -= d;
+                    G[e.dst][e.rev].cap += d;
+                    return d;
+                }
+            }
+        }
+        return 0;
+    }
+};

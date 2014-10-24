@@ -2,7 +2,8 @@
 // 最大二部マッチング O(E sqrt(V))
 // /* 左側の頂点の数と右側の頂点の数を指定する */
 // Bipartitematching solver(number_of_leftnodes, number_of_rightnodes)
-// /* 辺を追加する (左側の頂点のindex(0からV1-1), 右側の頂点のindex(0からV2-1)) */
+// /* 辺を追加する
+// (左側の頂点のindex(0からV1-1), 右側の頂点のindex(0からV2-1)) */
 // solver.add_edge(0, 0);
 // solver.add_edge(0, 1);
 // solver.add_edge(1, 1);

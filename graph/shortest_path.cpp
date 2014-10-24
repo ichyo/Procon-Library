@@ -1,7 +1,7 @@
 #include "../common/common.h"
 #include "../common/graph_weight.h"
 
-// Bellman-Foard
+// Bellman-Ford
 // Complexity: O(VE)
 //
 // 注意

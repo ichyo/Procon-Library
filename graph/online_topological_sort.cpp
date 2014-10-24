@@ -87,7 +87,8 @@ class OnlineTopologicalSort{
         ub = order[a];
         if(lb < ub){ // bがaよりも左側にあるとき
             dfs(b); // bから辿れる頂点を列挙する
-            shift_node(); // bから辿れる頂点を右側に，残りの頂点を左側に，順序を保ったまま移動する
+            shift_node(); // bから辿れる頂点を右側に，残りの頂点を左側に，
+                          // 順序を保ったまま移動する
         }
     }
 
