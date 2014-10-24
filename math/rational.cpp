@@ -1,5 +1,4 @@
-typedef long long LL;
-LL gcd(LL a, LL b){ return (a % b == 0 ? b : gcd(b, a % b)); }
+#include "../common/common.h"
 
 struct Rational{
     // p : 分子 q : 分母
@@ -9,7 +8,7 @@ struct Rational{
             p *= -1;
             q *= -1;
         }
-        LL d = gcd(abs(p), q);
+        LL d = __gcd(abs(p), q);
         if(d == 0){
             p = 0;
             q = 1;
