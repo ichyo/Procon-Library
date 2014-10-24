@@ -1,5 +1,11 @@
 #include "../common/common.h"
 // Suffix Array (プログラミングコンテストチャレンジブック 2nd edition p.335)
+// Suffix Array と 高さ配列を計算する．
+// 計算量は: O(n (log n)^2)
+//
+// sa[0..n]: s[sa[i]..n-1] は i番目のSuffix
+// lcp[0..n-1] := s[sa[i]..n-1] と s[sa[i+1]..n-1] の 共通するSuffixの長さ
+//
 namespace SA{
     const int MAX_N = 1000000; // 入力文字列の最大長
 

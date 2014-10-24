@@ -1,4 +1,33 @@
 #include "../common/common.h"
+// Aho Corasick
+// 複数のパターンのマッチングを，文字列の長さに線形な時間で行う．
+//
+// build(patterns)
+// パターンマッチングオートマトンを構築する．
+// 計算量: O(sum of |patterns_i|)
+//
+// next_node(p, c):
+// オートマトンにおける，移動先を計算する．
+// 引数は，現在のノードと，入力文字
+//
+// match(root, query):
+// マッチするパターンとその位置をベクトルで返す．
+// 引数はオートマトンのルートノードと検索文字列．
+// 計算量は: O(|query|)
+//
+// 例:
+// vector<string> patterns = {"aaa", "abc"};
+//
+// Node* root = build(patterns);
+//
+// vector<P> v = match(root, "aaaabc");
+//
+// assert(v == vector<P>({{2, 0}, {3, 0}, {5, 1}}));
+// // s[0..2] == patterns[0]
+// // s[1..3] == patterns[0]
+// // s[2..5] == patterns[1]
+//
+// Verified: AOJ 2212
 
 struct Node{
     map<char, Node*> next;
@@ -52,20 +81,27 @@ Node *build(vector<string> pattens){
     return root;
 }
 
+// Trie木のノード p からの 文字 c に対応する移動先
+Node* next_node(Node* p, char c) {
+    while(!p->next[c]) p = p->fail;
+    return p->next[c];
+}
+
 // クエリにマッチしたパターンについて 
 // (last index, pattern id)のリストを返す
 typedef pair<int, int> P;
 vector<P> match(Node* root, string query){
+    int n = query.size();
     vector<P> res;
+
     Node* p = root;
-    for(int i = 0; i < query.size(); i++){
+    REP(i, n) {
         int c = query[i];
-        while(!p->next[c]) p = p->fail; 
-        p = p->next[c];
-        for(auto k : p->match){
+        p = next_node(p, c);
+        for(int k : p->match){
             res.push_back(P(i, k));
         }
     }
+
     return res;
 }
-
