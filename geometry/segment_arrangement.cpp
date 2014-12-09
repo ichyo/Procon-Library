@@ -45,11 +45,10 @@ Graph segment_arrangement(const vector<L> &ss, vector<P> &ps) {
 // 線分のリストからオーバーラップするものたちをまとめ,新しい線分のリストを作る.
 // 元々の線分のリストにおける順番は破壊される．
 //
-// Verified
-// AOJ 2113
+// not verified
 void merge_segments(vector<L>& segs) {
     auto merge_if_able = [](L& s, L t){
-        if (abs(cross(s[1]-s[0], t[1]-t[0])) > EPS) return false;
+        if (sign(cross(vec(s), vec(t))) != 0) return false;
         if (ccw(s[0], t[0], s[1]) == +1 ||
                 ccw(s[0], t[0], s[1]) == -1) return false; // not on the same line
         if (ccw(s[0], s[1], t[0]) == -2 ||

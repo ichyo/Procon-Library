@@ -228,6 +228,48 @@
 \subsection{Z変換}
 \lstinputlisting{../math/z_transform.cpp}
 
+\section{幾何}
+\subsection{公式集}
+\begin{description}
+    \item[正弦定理]
+        外接円の半径をRとすると，\[a = 2R\sin A\]
+    \item[余弦定理]
+        \[a^2 = b^2 + c^2 - 2bc\cos A\]
+        \[\cos A = \frac{b^2 + c^2 - a^2}{2bc}\]
+    \item[ヘロンの公式]
+        $s = \frac{a + b + c}{2}$とおくと面積$S$は，
+        \[S = \sqrt{s(s - a)(s - b)(s - c)}\]
+    \item[三角形の面積(1辺と両端角)]
+        \[S = \frac{a^2\sin B \sin C}{ 2\sin(B + C) }\]
+\end{description}
+\subsection{Point}
+\lstinputlisting{../geometry/point.cpp}
+\subsection{Line}
+\lstinputlisting{../geometry/line.cpp}
+\subsection{Polygon}
+\lstinputlisting{../geometry/polygon.cpp}
+\subsection{Circle}
+\lstinputlisting{../geometry/circle.cpp}
+\lstinputlisting{../geometry/circle_tangent.cpp}
+\subsection{Convex}
+\lstinputlisting{../geometry/convex.cpp}
+\subsection{3次元幾何}
+\lstinputlisting{../geometry/3dgeometory.cpp}
+\subsection{Triangle}
+\lstinputlisting{../geometry/triangle.cpp}
+\subsection{線分アレンジメント}
+ 複数の線分が与えられたとき,次のグラフを作成する.
+ \begin{itemize}
+   \item 線分の端点と線分対の交点を頂点として持ち,
+   \item 二頂点が同一線分に乗っていて二頂点の間に別の頂点は無いときに二頂点間距離を重みとする辺を持つ
+ \end{itemize}
+ ここではグラフのサイズを減らすために追加条件を課している.この条件は推移的な辺を省略したことになる.
+ 省略したくない場合はグラフ構成のときに cut のすべての対について辺を張ればよい.
+
+ 注意.入力の線分の集合に オーバーラップする線分は無いものとする.オーバーラップする線分がある可能性がある場合は,あらかじめ merge すること.
+
+\lstinputlisting{../geometry/segment_arrangement.cpp}
+
 \section{その他}
 \subsection{bit演算}
 \lstinputlisting{../others/bit.cpp}

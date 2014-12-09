@@ -73,20 +73,15 @@ vector<P> pLL(L l, L m){
 }
 
 // 線分と線分の交点
-// TODO: {(0, 0), (1, 0)} {(1, 0), (2, 0)}を投げたときに空集合が返ってきてしまう．(←直った?)
 vector<P> pSS(L l, L m){
     vector<P> res;
     auto find = [&](P p){ 
-        for(P r : res)
-            if(sign(abs(r - p)) == 0)
+        for(P r : res) if(sign(abs(r - p)) == 0)
                 return true;
         return false;
     };
-    for(P p : pLL(l, m)){
-        // 片方が直線の場合は適宜変えること
-        if(iSP(l,p) && iSP(m,p) && !find(p)){
+    for(P p : pLL(l, m))
+        if(iSP(l,p) && iSP(m,p) && !find(p)) // 片方が直線の場合は適宜変えること
             res.push_back(p);
-        }
-    }
     return res;
 }
