@@ -2,7 +2,8 @@ typedef complex<double> P;
 const double EPS = 1e-8;
 
 // 誤差を加味した符号判定
-int sign(double x){ return x > EPS ? 1 : x < -EPS ? -1 : 0; }
+int sign(double x){ return (x > EPS) - (x < -EPS); }
+int comp(double x, double y) { return sign(x - y); }
 
 // 内積・外積
 double dot(P a, P b){return real(conj(a) * b);}
@@ -29,6 +30,6 @@ enum{ OUT, ON, IN };
 // Pointの比較をしたいときだけ定義する．
 namespace std{
     bool operator < (const P& a, const P& b) {
-        return a.real() != b.real() ? a.real() < b.real() : a.imag() < b.imag();
+        return comp(a.real(), b.real()) ? comp(a.real(), b.real()) < 0 : comp(a.imag(), b.imag()) < 0;
     }
 };
