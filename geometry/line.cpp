@@ -5,7 +5,7 @@ P vec(L l){return l[1] - l[0];}
 
 // 二直線の平行判定
 // verify : AOJ0021
-bool paralell(L l, L m){return sign(cross(vec(l), vec(m))) == 0;}
+bool parallel(L l, L m){return sign(cross(vec(l), vec(m))) == 0;}
 
 // 二直線の同一判定
 bool equalLL(L l, L m){return paralell(l, m) && sign(cross(vec(l), m[0] - l[0])) == 0;}
