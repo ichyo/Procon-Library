@@ -1,9 +1,7 @@
 // 凸包
 Pol convex_hull(vector<P> ps) {
     int n = ps.size(), k = 0;
-    sort(ps.begin(), ps.end(),[](const P&a, const P&b){
-            return real(a) != real(b) ? real(a) < real(b) : imag(a) < imag(b);
-            });
+    sort(ps.begin(), ps.end());
 
     vector<P> ch(2*n);
     for (int i = 0; i < n; ch[k++] = ps[i++]){ // lower-hull
