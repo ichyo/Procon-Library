@@ -30,6 +30,6 @@ enum{ OUT, ON, IN };
 // Pointの比較をしたいときだけ定義する．
 namespace std{
     bool operator < (const P& a, const P& b) {
-        return comp(a.real(), b.real()) ? comp(a.real(), b.real()) < 0 : comp(a.imag(), b.imag()) < 0;
+        return comp(a.real(), b.real()) ? a.real() < b.real() : a.imag() < b.imag();
     }
 };
