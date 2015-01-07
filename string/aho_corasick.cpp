@@ -63,8 +63,10 @@ Node *build(vector<string> pattens){
     }
     while(!que.empty()){
         Node* p = que.front(); que.pop();
-        for(int i = 0; i < 128; i++) if(p->next[i]) {
-            Node* np = p->next[i];
+        for(auto a : next) {
+            int i = a.first;
+            Node* np = a.second;
+            if(!np) continue;
 
             // add que
             que.push(np);
