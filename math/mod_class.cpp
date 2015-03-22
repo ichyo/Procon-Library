@@ -1,16 +1,67 @@
 #include "../common/common.h"
-// 剰余を自動で行うためのクラス
-static const unsigned MODVAL = 1000000007;
-struct mint {
+// ModInt (ref. anta) {{{
+template<int MOD>
+struct ModInt{
+    static const int Mod = MOD;
     unsigned val;
-    mint():val(0){}
-    mint(int      x):val(x%MODVAL) {}
-    mint(unsigned x):val(x%MODVAL) {}
-    mint(LL       x):val(x%MODVAL) {}
+    ModInt():val(0){}
+    ModInt(unsigned x):val(x){}
+    ModInt(signed x) {
+        int y = x % MOD;
+        if(y < 0) y += MOD;
+        val = y;
+    }
+    ModInt(signed long long x) {
+        int y = x % MOD;
+        if(y < 0) y += MOD;
+        val = y;
+    }
+
+    ModInt &operator+=(ModInt rhs) {
+        val += rhs.val;
+        if(val >= MOD) val -= MOD;
+        return *this;
+    }
+    ModInt &operator-=(ModInt rhs) {
+        val += MOD - rhs.val;
+        if(val >= MOD) val -= MOD;
+        return *this;
+    }
+    ModInt &operator*=(ModInt rhs) {
+        val = (unsigned long long)val * rhs.val % MOD;
+        return *this;
+    }
+    ModInt &operator/=(ModInt rhs) {
+        return *this *= rhs.inv();
+    }
+
+    ModInt inv() const {
+        signed a = val, b = MOD, u = 1, v = 0;
+        while(b) {
+            signed t = a / b;
+            a -= t * b; std::swap(a, b);
+            u -= t * v; std::swap(u, v);
+        }
+        if(u < 0) u += Mod;
+        return ModInt(u);
+    }
+
+    ModInt operator+(ModInt rhs) const {
+        return ModInt(*this) += rhs;
+    }
+    ModInt operator-(ModInt rhs) const {
+        return ModInt(*this) -= rhs;
+    }
+    ModInt operator*(ModInt rhs) const {
+        return ModInt(*this) *= rhs;
+    }
+    ModInt operator/(ModInt rhs) const {
+        return ModInt(*this) /= rhs;
+    }
 };
-mint& operator+=(mint& x, mint y) { return x = x.val+y.val; }
-mint& operator-=(mint& x, mint y) { return x = x.val-y.val+MODVAL; }
-mint& operator*=(mint& x, mint y) { return x = LL(x.val)*y.val; }
-mint operator+(mint x, mint y) { return x+=y; }
-mint operator-(mint x, mint y) { return x-=y; }
-mint operator*(mint x, mint y) { return x*=y; }
+template<int MOD>
+ostream& operator << (ostream& os, const ModInt<MOD> m) {
+    return os << m.val;
+}
+// }}}
+typedef ModInt<1000000007> mint;
