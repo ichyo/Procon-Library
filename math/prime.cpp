@@ -27,3 +27,4 @@ bool miller_rabin(LL n){
 
     return true;
 }
+
