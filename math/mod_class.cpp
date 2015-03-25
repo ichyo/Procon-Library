@@ -5,7 +5,7 @@ struct ModInt{
     static const int Mod = MOD;
     unsigned val;
     ModInt():val(0){}
-    ModInt(unsigned x):val(x){}
+    ModInt(unsigned x):val(x%MOD){}
     ModInt(signed x) {
         int y = x % MOD;
         if(y < 0) y += MOD;
@@ -43,7 +43,9 @@ struct ModInt{
             u -= t * v; std::swap(u, v);
         }
         if(u < 0) u += Mod;
-        return ModInt(u);
+        ModInt res;
+        res.val = u;
+        return res;
     }
 
     ModInt operator+(ModInt rhs) const {
