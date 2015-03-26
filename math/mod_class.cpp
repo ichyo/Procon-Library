@@ -60,6 +60,26 @@ struct ModInt{
     ModInt operator/(ModInt rhs) const {
         return ModInt(*this) /= rhs;
     }
+
+    // compare
+    bool operator==(ModInt rhs) const {
+        return val == rhs.val;
+    }
+    bool operator!=(ModInt rhs) const {
+        return val != rhs.val;
+    }
+    bool operator< (ModInt rhs) const {
+        return val <  rhs.val;
+    }
+    bool operator<=(ModInt rhs) const {
+        return val <= rhs.val;
+    }
+    bool operator> (ModInt rhs) const {
+        return val >  rhs.val;
+    }
+    bool operator>=(ModInt rhs) const {
+        return val >= rhs.val;
+    }
 };
 template<int MOD>
 ostream& operator << (ostream& os, const ModInt<MOD> m) {
