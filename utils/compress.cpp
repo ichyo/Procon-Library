@@ -8,7 +8,7 @@ int compress(vector<T>& v) {
     sort(x.begin(), x.end());
     x.resize(unique(x.begin(), x.end()) - x.begin());
 
-    map<T, int> m;
+    unordered_map<T, int> m;
     for(size_t i = 0; i < x.size(); i++) {
         m[x[i]] = i;
     }

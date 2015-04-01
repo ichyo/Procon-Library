@@ -22,7 +22,7 @@ void grid_bfs(const Grid& grid, char sc, char wallc, Dist& dist) {
     auto valid = [&](int x, int w) {
         return 0 <= x && x < w;
     };
-    auto move = [&](int x, int y, int d) {
+    auto move_to = [&](int x, int y, int d) {
         if(!valid(x, W)) return;
         if(!valid(y, H)) return;
         if(grid[y][x] == wallc) return;
@@ -32,7 +32,7 @@ void grid_bfs(const Grid& grid, char sc, char wallc, Dist& dist) {
         qy.push(y);
     };
 
-    move(sx, sy, 0);
+    move_to(sx, sy, 0);
 
     while(!qx.empty()) {
         int x = qx.front(); qx.pop();
@@ -42,7 +42,7 @@ void grid_bfs(const Grid& grid, char sc, char wallc, Dist& dist) {
             int nx = x + dx[r];
             int ny = y + dy[r];
             int nd = d + 1;
-            move(nx, ny, nd);
+            move_to(nx, ny, nd);
         }
     }
 }
