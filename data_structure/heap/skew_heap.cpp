@@ -3,10 +3,8 @@
 template<typename T>
 struct Heap {
     T val;
-    Heap* l;
-    Heap* r;
-    Heap() : val(T()), l(nullptr), r(nullptr) {}
-    Heap(T x) : val(x), l(nullptr), r(nullptr) {}
+    Heap *l, *r;
+    Heap(T x=T()) : val(x), l(nullptr), r(nullptr) {}
 };
 
 template<typename T>
