@@ -52,18 +52,19 @@ struct RMHash{
         return res;
     }
 };
+typedef RMHash<1000003, 1000000021> Hash;
 
 // --- 
 // a が b に含まれているか
+template<typename C_Hash=Hash>
 bool contain(string a, string b) {
-    typedef RHash<1000000007> Hash;
     int al = a.size(), bl = b.size();
     if(al > bl) return false;
 
-    Hash A(a);
+    C_Hash A(a);
     ULL ah = A.h(al);
 
-    Hash B(b);
+    C_Hash B(b);
     for(int i = 0; i + al <= bl; i++) {
         if(B.h(i, i + al) == ah) {
             return true;
