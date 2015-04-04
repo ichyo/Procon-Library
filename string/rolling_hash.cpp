@@ -37,7 +37,7 @@ struct RMHash{
         hash.assign(n + 1, 0);
         REP(i, n) {
             pow[i + 1] = ((long long)pow[i] * B) % M;
-            hash[i + 1] = (s[i] + (long long)hash[i] * B % M) % M;
+            hash[i + 1] = (s[i] + (long long)hash[i] * B) % M;
         }
     }
     // hash of s[0..i)
