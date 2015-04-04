@@ -1,7 +1,7 @@
 #include "../common/common.h"
 typedef unsigned long long ULL;
 
-// mod 2^64 の ローリングハッシュ
+// mod 2^64 の ローリングハッシュ (衝突させられるから通常は使用しない)
 template<ULL B>
 struct RHash{
     vector<ULL> pow; 
@@ -21,11 +21,12 @@ struct RHash{
     }
     // hash of s[i..j)
     ULL h(int i, int j) {
+        if(i == 0) return h(j);
         return h(j) - h(i) * pow[j-i];
     }
 };
 
-// mod 2^64 が 攻撃されているときに使う． (ref. http://hos.ac/blog/)
+// MODを指定できるローリングハッシュ．(普段はこれを使う) (ref. http://hos.ac/blog/)
 template<int B, int M>
 struct RMHash{
     vector<int> pow;
@@ -45,7 +46,10 @@ struct RMHash{
     }
     // hash of s[i..j)
     int h(int i, int j) {
-        return (h(j) + M - (long long)h(i) * pow[j-i] % M) % M;
+        if(i == 0) return h(j);
+        int res = (h(j) - (long long)h(i) * pow[j-i]) % M;
+        if(res < 0) res += M;
+        return res;
     }
 };
 
