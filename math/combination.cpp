@@ -57,6 +57,7 @@ struct CombM{
 
     mint nCr(int n, int r) {
         assert(n < (int)fact.size());
+        if(n >= MOD) return nCr(n%MOD, r%MOD) * nCr(n/MOD, r/MOD); // Lucas' theorem
         return r > n ? 0 : fact[n] * factinv[n-r] * factinv[r];
     }
 

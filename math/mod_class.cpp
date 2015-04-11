@@ -42,7 +42,7 @@ struct ModInt{
             a -= t * b; std::swap(a, b);
             u -= t * v; std::swap(u, v);
         }
-        if(u < 0) u += Mod;
+        if(u < 0) u += MOD;
         ModInt res;
         res.val = u;
         return res;
