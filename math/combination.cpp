@@ -34,3 +34,34 @@ void init(){
 int comb2(int n, int k){
     return (((LL)fact[n] * rfact[n - k]) % MOD) * rfact[k] % MOD;
 }
+
+// ---
+// combination (ref. anta's library)
+#include "./mod_class.cpp"
+template<int MOD>
+struct CombM{
+    static const int Mod = MOD;
+    typedef ModInt<MOD> mint;
+    vector<mint> fact;
+    vector<mint> factinv;
+    CombM(int N) {
+        N = min(N, MOD-1);
+        fact.resize(N+1);
+        factinv.resize(N+1);
+        REP(i, N+1) {
+            fact[i] = (i == 0 ? 1 : fact[i-1] * i);
+        }
+        factinv[N] = fact[N].inv();
+        for(int i = N; i >= 1; i--) factinv[i-1] = factinv[i] * i;
+    }
+
+    mint nCr(int n, int r) {
+        assert(n < (int)fact.size());
+        return r > n ? 0 : fact[n] * factinv[n-r] * factinv[r];
+    }
+
+    mint nHr(int n, int r) {
+        return r == 0 ? 1 : nCr(n+r-1, r);
+    }
+};
+typedef CombM<1000000007> Comb;
