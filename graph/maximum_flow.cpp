@@ -116,3 +116,75 @@ struct FordFulkerson{
         return 0;
     }
 };
+
+// Dinic (浮動小数点対応)
+// verified: 2014-2015 ACM-ICPC, Asia Xian Regional Contest C: The Problem Needs 3D Arrays
+template<typename T>
+struct DinicD{
+    struct Edge{ 
+        int dst;
+        T cap;
+        int rev;
+    };
+    static constexpr T EPS = 1e-8;
+    static constexpr T INF = numeric_limits<T>::max()/4;
+    typedef vector<Edge> Node;
+    typedef vector<Node> Graph;
+    Graph G;
+    vector<int> level;
+    vector<int> iter;
+    
+    DinicD(int N) : G(N), level(N), iter(N) {}
+
+    void bfs(int s){
+        level.assign(G.size(), -1);
+        queue<int> que;
+        que.push(s);
+        level[s] = 0;
+        while(!que.empty()){
+            int v = que.front(); que.pop();
+            for(const auto& e : G[v]){
+                if(e.cap > EPS && level[e.dst] < 0){
+                    level[e.dst] = level[v] + 1;
+                    que.push(e.dst);
+                }
+            }
+        }
+    }
+
+    T dfs(int v, int t, T f){
+        if(v == t) return f;
+        for(int& i = iter[v]; i < G[v].size(); i++){
+            Edge& e = G[v][i];
+            if(e.cap > 0 && level[v] < level[e.dst]){
+                T d = dfs(e.dst, t, min(f, e.cap));
+                if(d > 0){
+                    e.cap -= d;
+                    G[e.dst][e.rev].cap += d;
+                    return d;
+                }
+            }
+        }
+        return 0;
+    }
+
+    void add_edge(int src, int dst, T cap){
+        G[src].push_back({dst, cap, (int)G[dst].size()});
+        G[dst].push_back({src, 0, (int)G[src].size() - 1});
+    }
+
+    T max_flow(int src, int dst){
+        T flow = 0;
+        while(true){
+            bfs(src);
+            if(level[dst] < 0) break;
+            iter.assign(G.size(), 0);
+            while(true){
+                T f = dfs(src, dst, INF);
+                if(f < EPS) break;
+                flow += f;
+            }
+        }
+        return flow;
+    }
+};
