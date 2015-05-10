@@ -1,4 +1,3 @@
-#include "../common/common.h"
 // 2次方程式 ax^2 + bx + c = 0の解 (重解を一つにまとめる)
 vector<double> quadratic(double a, double b, double c){
     if(abs(a) < EPS){

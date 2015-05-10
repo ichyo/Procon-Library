@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 void combination(int n, int k) {
     // nCkのビットコンビネーションを辞書順で列挙する

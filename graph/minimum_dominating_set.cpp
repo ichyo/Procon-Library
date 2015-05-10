@@ -1,4 +1,3 @@
-#include "../common/common.h"
 // 支配集合問題 ref. Operafan library
 // Verify: AOJ 1015
 //

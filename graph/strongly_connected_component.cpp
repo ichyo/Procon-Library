@@ -1,5 +1,3 @@
-#include "../common/common.h"
-#include "../common/graph.h"
 
 // Tarjan's strongly connected components algorithm
 // Complexity: O(|V| + |E|)

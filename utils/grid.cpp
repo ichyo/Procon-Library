@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 template<typename Grid, typename Dist>
 void grid_bfs(const Grid& grid, char sc, char wallc, Dist& dist) {

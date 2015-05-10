@@ -1,4 +1,3 @@
-#include "../common/common.h"
 int edit_distance(const string& a, const string& b){
     int n = a.size(), m = b.size();
 

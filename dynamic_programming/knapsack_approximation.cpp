@@ -1,4 +1,3 @@
-#include "../common/common.h"
 // 0-1ナップサック問題(近似アルゴリズム) (https://gist.github.com/spaghetti-source/9565504_)
 //
 // 概要:

@@ -1,4 +1,3 @@
-#include "../common/common.h"
 typedef vector<LL> Array;
 typedef vector<Array> Matrix;
 

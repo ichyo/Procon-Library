@@ -1,4 +1,3 @@
-#include "../common/common.h"
 // 最大二部マッチング O(VE)
 //
 // /* 頂点の数を指定 */

@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 struct Node{
     int value;

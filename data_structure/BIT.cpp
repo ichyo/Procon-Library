@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 // cf. http://hos.ac/slides/20140319_bit.pdf
 

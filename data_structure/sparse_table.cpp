@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 template<typename T, typename Comp=less<T>>
 class SparseTable{

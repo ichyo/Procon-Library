@@ -1,4 +1,3 @@
-#include "../common/common.h"
 // Verified : AOJ 1040 (Chocolate with Heart Marks)
 // 使い方:
 // T : シュタイナー木が含まなければならない頂点集合

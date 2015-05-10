@@ -1,4 +1,3 @@
-#include "../common/common.h"
 // Z Algorithm O(n)
 // 1..n-1の範囲でz[i] := s[0..] と s[i..]のマッチする長さのベクタを返す。z[0] は 0
 vector<int> Z_Algorithm(const string& s) {

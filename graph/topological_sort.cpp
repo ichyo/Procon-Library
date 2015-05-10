@@ -1,5 +1,3 @@
-#include "../common/common.h"
-#include "../common/graph.h"
 
 bool visit(const Graph &g, int v, vector<int> &order, vector<int> &color) {
     color[v] = 1;

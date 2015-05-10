@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 struct Rational{
     // p : 分子 q : 分母

@@ -5,7 +5,6 @@
 // Verified: AOJ 2309, UVA 11183
 //
 // 注意: 強連結成分分解を重み付きversionに書き換える必要あり．
-#include "../common/common.h"
 struct Edge{
     int src, dst, cost;
 };

@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 void transform1(int N, int a[]){
     // 変換前 a[S] := f(S)

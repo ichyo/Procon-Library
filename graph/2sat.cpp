@@ -1,6 +1,3 @@
-#include "../common/common.h"
-#include "../common/graph.h"
-#include "./strongly_connected_component.cpp"
 
 struct SAT2{
     int n, V;

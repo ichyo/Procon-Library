@@ -1,4 +1,3 @@
-#include "../common/common.h"
 
 typedef vector<double> Vec;
 typedef vector<Vec> Mat;

@@ -1,5 +1,3 @@
-#include "../common/common.h"
-#include "../common/graph.h"
 // 関節点・橋 (ref. natsugiri's code)
 class ArticulationPoint {
 // ArticulationPoint {{{

@@ -1,5 +1,4 @@
 // This code were originally copied from zerokugi's code (http://codeforces.com/contest/526/submission/10585724).
-#include "../common/common.h"
 
 class SuffixArray{
 private:
