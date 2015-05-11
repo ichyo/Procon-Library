@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // combination 1
 // 計算量: O(MAX_N * MAX_K)
 // 制約: n < MAX_N, k < MAX_K
@@ -36,6 +37,7 @@ int comb2(int n, int k){
 
 // ---
 // combination (ref. anta's library)
+#include "./mod_class.cpp"
 template<int MOD>
 struct CombM{
     static const int Mod = MOD;

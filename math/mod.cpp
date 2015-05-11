@@ -1,3 +1,4 @@
+#include "../common/common.h"
 
 LL extgcd(LL a, LL b, LL& x, LL& y){
     LL d = a;

@@ -1,3 +1,4 @@
+#include "../common/common.h"
 
 LL gcd(LL a, LL b){
     return b > 0 ? gcd(b, a % b) : a;

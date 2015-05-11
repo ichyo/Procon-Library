@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // Givens消去法(QR分解)
 // 説明
 // n x nの正方行列Aとベクトルbを入力として，

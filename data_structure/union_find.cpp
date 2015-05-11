@@ -1,3 +1,4 @@
+#include "../common/common.h"
 
 // UnionFind 
 struct UnionFind {

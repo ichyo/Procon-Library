@@ -1,3 +1,4 @@
+#include "../common/common.h"
 
 // 単調関数 f の零点を [l, r] の範囲で求める
 double find_root(double l, double r, double f(double)){

@@ -1,3 +1,4 @@
+#include "../common/common.h"
 
 // 区間[l, r]をN分割し、各区間を2次関数に近似する
 // 計算時間: O(N * f(x))

@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // 最大共通部分列 (longest common sequence)
 // 計算量: O(nm)
 vector<int> lcs(const vector<int>& a, const vector<int>& b){

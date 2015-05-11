@@ -1,3 +1,4 @@
+#include "../common/common.h"
 
 // v[l] + v[l+1] + ... + v[r-1] を定数時間で計算する
 // l >= r のときは [l, n) + [0, r) の和を返す

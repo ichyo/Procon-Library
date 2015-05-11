@@ -1,5 +1,4 @@
 *.o
-*.out
 *_test
 !*_test.cpp
 

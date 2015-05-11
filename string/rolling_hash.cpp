@@ -1,3 +1,4 @@
+#include "../common/common.h"
 typedef unsigned long long ULL;
 
 // mod 2^64 の ローリングハッシュ (衝突させられるから通常は使用しない)

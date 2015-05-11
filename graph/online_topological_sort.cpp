@@ -1,3 +1,5 @@
+#include "../common/common.h"
+#include "../common/graph.h"
 // オンライントポロジカルソート
 // 概要:
 // オンライン版のトポロジカルソート．

@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // ModInt (ref. anta) {{{
 template<int MOD>
 struct ModInt{

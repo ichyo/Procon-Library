@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // Suffix Array (プログラミングコンテストチャレンジブック 2nd edition p.335)
 // Suffix Array と 高さ配列を計算する．
 // 計算量は: O(n (log n)^2)

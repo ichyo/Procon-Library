@@ -1,3 +1,5 @@
+#include "../common/common.h"
+#include "./mod.cpp"
 
 // [2, N] の範囲の素数を列挙する。
 vector<int> all_primes(int N) {

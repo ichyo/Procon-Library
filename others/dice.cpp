@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // サイコロ
 enum FACE { TOP, BOTTOM, FRONT, BACK, LEFT, RIGHT };
 

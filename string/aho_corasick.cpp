@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // Aho Corasick
 // 複数のパターンのマッチングを，文字列の長さに線形な時間で行う．
 //

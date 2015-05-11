@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // 最大二部マッチング O(E sqrt(V))
 // /* 左側の頂点の数と右側の頂点の数を指定する */
 // Bipartitematching solver(number_of_leftnodes, number_of_rightnodes)

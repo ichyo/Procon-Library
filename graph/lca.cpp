@@ -1,3 +1,5 @@
+#include "../common/common.h"
+#include "../common/graph.h"
 
 // 最近共通祖先
 // 使い方:

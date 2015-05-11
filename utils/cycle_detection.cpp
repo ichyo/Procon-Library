@@ -1,3 +1,4 @@
+#include "../common/common.h"
 // Brent's algorithms
 // Time: O(index + length) Space: O(1)
 template<typename T, typename Func>
